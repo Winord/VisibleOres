@@ -42,8 +42,8 @@ public final class ClothConfigScreenBuilder {
                 .build();
 
         var packEntry = entryBuilder
-                .startStringDropdownMenu(Component.translatable(key("custom_pack")), current.customPack(), CustomPacks::displayName)
-                .setSelections(CustomPacks.available(current.customPack()))
+                .startStringDropdownMenu(Component.translatable(key("custom_pack")), CustomPacks.normalize(current.customPack()), CustomPacks::displayName)
+                .setSelections(CustomPacks.selections(current.customPack()))
                 .setSuggestionMode(false)
                 .setDefaultValue(DeepDebrisConfig.DEFAULT_CUSTOM_PACK)
                 .setTooltip(Component.translatable(key("custom_pack.tooltip")))
@@ -55,7 +55,7 @@ public final class ClothConfigScreenBuilder {
         general.addEntry(sourceEntry);
         general.addEntry(packEntry);
 
-        builder.setSavingRunnable(() -> DeepDebrisConfig.apply(enabledEntry.getValue(), thresholdEntry.getValue(), sourceEntry.getValue(), packEntry.getValue()));
+        builder.setSavingRunnable(() -> DeepDebrisConfig.apply(enabledEntry.getValue(), thresholdEntry.getValue(), sourceEntry.getValue(), CustomPacks.normalize(packEntry.getValue())));
         return builder.build();
     }
 

@@ -10,6 +10,7 @@ import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.ResourceMetadata;
 import winord.deepdebris.DeepDebris;
+import winord.deepdebris.config.CustomPacks;
 import winord.deepdebris.config.DeepDebrisConfig;
 import winord.deepdebris.config.TextureSource;
 
@@ -36,9 +37,9 @@ public record CustomPackTextureSource(Identifier resource, Identifier sprite) im
         loadedPack = packId;
         if (packId.isEmpty()) return;
 
-        var pack = Minecraft.getInstance().getResourcePackRepository().getPack(packId);
+        var pack = Minecraft.getInstance().getResourcePackRepository().getPack(CustomPacks.packId(packId));
         if (pack == null) {
-            DeepDebris.LOGGER.warn("Resource pack {} is not available", packId);
+            DeepDebris.LOGGER.warn("Resource pack {} is not available, found: {}", packId, CustomPacks.availableNames());
             return;
         }
 
@@ -69,6 +70,7 @@ public record CustomPackTextureSource(Identifier resource, Identifier sprite) im
 
             var parsed = metadata;
             output.add(sprite, new Resource(resources, () -> new ByteArrayInputStream(imageBytes), () -> parsed));
+            DeepDebris.LOGGER.info("Using {} from resource pack {} as {}", file, packId, sprite);
         } catch (IOException e) {
             DeepDebris.LOGGER.warn("Could not read {} from {}", file, packId, e);
         } finally {

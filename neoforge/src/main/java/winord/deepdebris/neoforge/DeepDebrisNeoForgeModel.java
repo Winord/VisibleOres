@@ -22,25 +22,22 @@ public final class DeepDebrisNeoForgeModel extends DelegateBlockStateModel {
 
     @Override
     public void collectParts(BlockAndTintGetter level, BlockPos pos, BlockState state, RandomSource random, List<BlockStateModelPart> parts) {
-        var kind = DeepRule.kind(level, pos);
-        if (kind == null) {
+        if (!DeepRule.applies(level, pos)) {
             super.collectParts(level, pos, state, random, parts);
             return;
         }
-        variant.collectParts(kind, delegate, random, parts);
+        variant.collectDeepParts(delegate, random, parts);
     }
 
     @Override
     public int materialFlags(BlockAndTintGetter level, BlockPos pos, BlockState state) {
-        var kind = DeepRule.kind(level, pos);
-        if (kind == null) return super.materialFlags(level, pos, state);
-        return variant.materialFlags(kind, delegate);
+        if (!DeepRule.applies(level, pos)) return super.materialFlags(level, pos, state);
+        return variant.deepMaterialFlags(delegate);
     }
 
     @Override
     public Material.Baked particleMaterial(BlockAndTintGetter level, BlockPos pos, BlockState state) {
-        var kind = DeepRule.kind(level, pos);
-        if (kind == null) return super.particleMaterial(level, pos, state);
-        return variant.particleMaterial(kind, delegate);
+        if (!DeepRule.applies(level, pos)) return super.particleMaterial(level, pos, state);
+        return variant.deepParticleMaterial(delegate);
     }
 }

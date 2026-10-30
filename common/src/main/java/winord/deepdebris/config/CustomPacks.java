@@ -8,23 +8,38 @@ import java.util.List;
 
 import static winord.deepdebris.DeepDebris.MOD_ID;
 
-final class CustomPacks {
+public final class CustomPacks {
     private static final String FOLDER_PREFIX = "file/";
 
     private CustomPacks() { }
 
-    static List<String> available(String current) {
-        var ids = new ArrayList<String>();
-        ids.add("");
-        for (var pack : Minecraft.getInstance().getResourcePackRepository().getAvailablePacks()) {
-            if (pack.getId().startsWith(FOLDER_PREFIX)) ids.add(pack.getId());
-        }
-        if (!current.isEmpty() && !ids.contains(current)) ids.add(current);
-        return ids;
+    public static String packId(String name) {
+        return name.startsWith(FOLDER_PREFIX) ? name : FOLDER_PREFIX + name;
     }
 
-    static Component displayName(String id) {
-        if (id.isEmpty()) return Component.translatable("config." + MOD_ID + ".custom_pack.none");
-        return Component.literal(id.startsWith(FOLDER_PREFIX) ? id.substring(FOLDER_PREFIX.length()) : id);
+    public static List<String> availableNames() {
+        var names = new ArrayList<String>();
+        for (var pack : Minecraft.getInstance().getResourcePackRepository().getAvailablePacks()) {
+            if (pack.getId().startsWith(FOLDER_PREFIX)) names.add(pack.getId().substring(FOLDER_PREFIX.length()));
+        }
+        return names;
+    }
+
+    static List<String> selections(String current) {
+        var names = new ArrayList<String>();
+        names.add("");
+        names.addAll(availableNames());
+        var normalized = normalize(current);
+        if (!normalized.isEmpty() && !names.contains(normalized)) names.add(normalized);
+        return names;
+    }
+
+    static String normalize(String name) {
+        return name.startsWith(FOLDER_PREFIX) ? name.substring(FOLDER_PREFIX.length()) : name;
+    }
+
+    static Component displayName(String name) {
+        if (name.isEmpty()) return Component.translatable("config." + MOD_ID + ".custom_pack.none");
+        return Component.literal(name);
     }
 }
