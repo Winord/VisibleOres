@@ -1,0 +1,32 @@
+{
+    "schemaVersion": 1,
+    "id": "deepdebris",
+    "version": "${version}",
+    "name": "Deep Debris",
+    "description": "A client-side mod that gives Ancient Debris in the Nether a different texture below a configurable height",
+    "authors": [
+        "Winord"
+    ],
+    "contact": {
+        "issues": "https://github.com/Winord/DeepDebris/issues"
+    },
+    "license": "All Rights Reserved",
+    "icon": "assets/deepdebris/icon.png",
+    "environment": "client",
+    "entrypoints": {
+        "main":    [ "winord.deepdebris.fabric.DeepDebrisFabric" ],
+        "client":  [ "winord.deepdebris.fabric.DeepDebrisFabricClient" ],
+        "modmenu": [ "winord.deepdebris.fabric.ModMenuIntegration" ]
+    },
+    "depends": {
+        "fabricloader": ">=0.19.5",
+        "fabric-api": "*",
+        "architectury": ">=20",
+        "minecraft": ">=26.1 <26.2",
+        "java": ">=25"
+    },
+    "suggests": {
+        "cloth-config": "*",
+        "modmenu": "*"
+    }
+}

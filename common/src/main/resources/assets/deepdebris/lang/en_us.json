@@ -1,0 +1,17 @@
+{
+  "config.deepdebris.title": "Deep Debris",
+  "config.deepdebris.category.general": "General",
+  "config.deepdebris.enabled": "Enabled",
+  "config.deepdebris.enabled.tooltip": "Turns the alternate Ancient Debris texture on or off.",
+  "config.deepdebris.depth_threshold": "Depth Threshold (Y)",
+  "config.deepdebris.depth_threshold.tooltip": "Ancient Debris in the Nether below this Y level uses the deep texture.\nBlocks at this level and above stay vanilla.",
+  "config.deepdebris.texture_source": "Texture Source",
+  "config.deepdebris.texture_source.tooltip": "Default: Ancient Debris below the threshold uses the mod's own deep texture.\nCustom: it uses the texture from the resource pack chosen below.",
+  "config.deepdebris.texture_source.default": "Default",
+  "config.deepdebris.texture_source.custom": "Custom",
+  "config.deepdebris.custom_pack": "Custom Resource Pack",
+  "config.deepdebris.custom_pack.tooltip": "A pack from your resourcepacks folder that replaces the Ancient Debris texture.\nIt is read directly: it does not need to be enabled in the Resource Packs screen.\nChanging it reloads resources.",
+  "config.deepdebris.custom_pack.none": "None",
+  "config.deepdebris.missing_cloth.message": "Install Cloth Config to edit Deep Debris settings in game.\nUntil then the mod uses config/deepdebris/settings.json.",
+  "config.deepdebris.missing_cloth.modrinth": "Open Cloth Config on Modrinth"
+}

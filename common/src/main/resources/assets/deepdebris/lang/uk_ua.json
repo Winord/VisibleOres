@@ -1,0 +1,17 @@
+{
+  "config.deepdebris.title": "Deep Debris",
+  "config.deepdebris.category.general": "Загальне",
+  "config.deepdebris.enabled": "Увімкнено",
+  "config.deepdebris.enabled.tooltip": "Вмикає або вимикає альтернативну текстуру Ancient Debris.",
+  "config.deepdebris.depth_threshold": "Поріг глибини (Y)",
+  "config.deepdebris.depth_threshold.tooltip": "Ancient Debris у Нижньому світі нижче цього рівня Y має глибоку текстуру.\nБлоки на цьому рівні й вище лишаються ванільними.",
+  "config.deepdebris.texture_source": "Джерело текстури",
+  "config.deepdebris.texture_source.tooltip": "Default: Ancient Debris нижче порога має власну глибоку текстуру мода.\nCustom: використовується текстура з ресурс-пака, обраного нижче.",
+  "config.deepdebris.texture_source.default": "Default",
+  "config.deepdebris.texture_source.custom": "Custom",
+  "config.deepdebris.custom_pack": "Власний ресурс-пак",
+  "config.deepdebris.custom_pack.tooltip": "Пак із вашої теки resourcepacks, що замінює текстуру Ancient Debris.\nЧитається напряму: вмикати його в екрані ресурс-паків не потрібно.\nЗміна перезавантажує ресурси.",
+  "config.deepdebris.custom_pack.none": "Немає",
+  "config.deepdebris.missing_cloth.message": "Встановіть Cloth Config, щоб змінювати налаштування Deep Debris у грі.\nДо того мод використовує config/deepdebris/settings.json.",
+  "config.deepdebris.missing_cloth.modrinth": "Відкрити Cloth Config на Modrinth"
+}

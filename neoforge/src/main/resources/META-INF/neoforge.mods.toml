@@ -1,0 +1,40 @@
+modLoader = "javafml"
+loaderVersion = "[1,)"
+license = "All Rights Reserved"
+issueTrackerURL = "https://github.com/Winord/DeepDebris/issues"
+
+[[mods]]
+modId = "deepdebris"
+version = "${version}"
+displayName = "Deep Debris"
+authors = "Winord"
+description = '''A client-side mod that gives Ancient Debris in the Nether a different texture below a configurable height'''
+logoFile = "icon.png"
+
+[[dependencies.deepdebris]]
+    modId = "neoforge"
+    type = "required"
+    versionRange = "[26.1,)"
+    ordering = "NONE"
+    side = "CLIENT"
+
+[[dependencies.deepdebris]]
+    modId = "minecraft"
+    type = "required"
+    versionRange = "[26.1,26.2)"
+    ordering = "NONE"
+    side = "CLIENT"
+
+[[dependencies.deepdebris]]
+    modId = "architectury"
+    type = "required"
+    versionRange = "[20,)"
+    ordering = "NONE"
+    side = "CLIENT"
+
+[[dependencies.deepdebris]]
+    modId = "cloth_config"
+    type = "optional"
+    versionRange = "[26,)"
+    ordering = "NONE"
+    side = "CLIENT"

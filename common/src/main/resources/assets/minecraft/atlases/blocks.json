@@ -1,0 +1,14 @@
+{
+  "sources": [
+    {
+      "type": "deepdebris:custom_pack_texture",
+      "resource": "minecraft:block/ancient_debris_side",
+      "sprite": "deepdebris:block/ancient_debris_custom_side"
+    },
+    {
+      "type": "deepdebris:custom_pack_texture",
+      "resource": "minecraft:block/ancient_debris_top",
+      "sprite": "deepdebris:block/ancient_debris_custom_top"
+    }
+  ]
+}
