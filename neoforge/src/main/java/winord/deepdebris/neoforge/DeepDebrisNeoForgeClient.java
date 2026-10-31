@@ -1,12 +1,12 @@
 package winord.deepdebris.neoforge;
 
-import net.minecraft.world.level.block.Blocks;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.RegisterSpriteSourcesEvent;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import winord.deepdebris.DeepDebrisClient;
 import winord.deepdebris.config.ConfigScreens;
+import winord.deepdebris.config.OreType;
 import winord.deepdebris.render.CustomPackTextureSource;
 
 final class DeepDebrisNeoForgeClient {
@@ -30,8 +30,9 @@ final class DeepDebrisNeoForgeClient {
     private static void onModifyBakingResult(ModelEvent.ModifyBakingResult event) {
         var models = event.getBakingResult().blockStateModels();
         for (var entry : models.entrySet()) {
-            if (entry.getKey().is(Blocks.ANCIENT_DEBRIS)) {
-                entry.setValue(new DeepDebrisNeoForgeModel(entry.getValue()));
+            var ore = OreType.of(entry.getKey());
+            if (ore != null) {
+                entry.setValue(new DeepDebrisNeoForgeModel(entry.getValue(), ore));
             }
         }
     }

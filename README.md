@@ -1,6 +1,12 @@
 # Deep Debris
-Deep Debris is a small **client-side** mod that gives **Ancient Debris** in the Nether a different texture below a
-configurable height. Nothing needs to be installed on the server.
+Deep Debris is a small **client-side** mod that swaps the textures of 20 ores (Nether and Overworld, Stone and
+Deepslate variants) per ore, dimension and height range. Texture sets: Standard, Fancy (animated, emissive, connected
+with Continuity) and Custom (any resource pack from `resourcepacks`). Nothing needs to be installed on the server.
+
+## Credits
+Bundled textures:
+- Vanilla Tweaks: https://vanillatweaks.net/
+- Animated Ore with Frames: https://modrinth.com/resourcepack/animated-ore-with-frames
 
 ## License
 All Rights Reserved — see [`LICENSE`](LICENSE).

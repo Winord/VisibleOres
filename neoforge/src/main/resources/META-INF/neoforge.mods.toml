@@ -8,7 +8,7 @@ modId = "deepdebris"
 version = "${version}"
 displayName = "Deep Debris"
 authors = "Winord"
-description = '''A client-side mod that gives Ancient Debris in the Nether a different texture below a configurable height'''
+description = '''A client-side mod that swaps ore textures per ore, dimension and height, with Standard, Fancy and Custom texture sets'''
 logoFile = "icon.png"
 
 [[dependencies.deepdebris]]

@@ -11,7 +11,7 @@ import net.minecraft.core.Direction;
 public final class DeepPartRemapper {
     private DeepPartRemapper() { }
 
-    public static BlockStateModelPart remap(BlockStateModelPart part, DeepSprites sprites) {
+    public static BlockStateModelPart remap(BlockStateModelPart part, DeepSprites sprites, TextureVariant variant) {
         if (!(part instanceof SimpleModelWrapper simple)) return part;
 
         var source = simple.quads();
@@ -19,13 +19,13 @@ public final class DeepPartRemapper {
         var changed = false;
 
         for (var quad : source.getQuads(null)) {
-            var remapped = remapQuad(quad, sprites);
+            var remapped = remapQuad(quad, sprites, variant);
             changed |= remapped != quad;
             builder.addUnculledFace(remapped);
         }
         for (var direction : Direction.values()) {
             for (var quad : source.getQuads(direction)) {
-                var remapped = remapQuad(quad, sprites);
+                var remapped = remapQuad(quad, sprites, variant);
                 changed |= remapped != quad;
                 builder.addCulledFace(direction, remapped);
             }
@@ -35,10 +35,10 @@ public final class DeepPartRemapper {
         return new SimpleModelWrapper(builder.build(), simple.useAmbientOcclusion(), simple.particleMaterial());
     }
 
-    private static BakedQuad remapQuad(BakedQuad quad, DeepSprites sprites) {
+    private static BakedQuad remapQuad(BakedQuad quad, DeepSprites sprites, TextureVariant variant) {
         var info = quad.materialInfo();
         var original = info.sprite();
-        var target = sprites.replacementFor(original.contents().name());
+        var target = sprites.replacementFor(variant, original.contents().name());
         if (target == null) return quad;
 
         var targetInfo = new BakedQuad.MaterialInfo(target, info.layer(), info.itemRenderType(),

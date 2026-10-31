@@ -11,28 +11,34 @@ import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jspecify.annotations.Nullable;
+import winord.deepdebris.config.OreType;
 import winord.deepdebris.render.DeepRule;
 import winord.deepdebris.render.DeepVariant;
+import winord.deepdebris.render.TextureVariant;
 
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
 public final class DeepDebrisFabricModel extends WrapperBlockStateModel {
-    private final DeepVariant variant = new DeepVariant();
+    private final OreType ore;
+    private final DeepVariant variant;
 
-    public DeepDebrisFabricModel(BlockStateModel wrapped) {
+    public DeepDebrisFabricModel(BlockStateModel wrapped, OreType ore) {
         super(wrapped);
+        this.ore = ore;
+        this.variant = new DeepVariant(ore);
     }
 
     @Override
     public void emitQuads(QuadEmitter emitter, BlockAndTintGetter level, BlockPos pos, BlockState state, RandomSource random, Predicate<@Nullable Direction> cullTest) {
-        if (!DeepRule.applies(level, pos)) {
+        var texture = DeepRule.resolve(ore, level, pos);
+        if (texture == null) {
             super.emitQuads(emitter, level, pos, state, random, cullTest);
             return;
         }
 
         var parts = new ArrayList<BlockStateModelPart>();
-        variant.collectDeepParts(wrapped, random, parts);
+        variant.collectDeepParts(wrapped, random, texture, parts);
         for (var part : parts) part.emitQuads(emitter, cullTest);
     }
 
@@ -40,14 +46,16 @@ public final class DeepDebrisFabricModel extends WrapperBlockStateModel {
     @Nullable
     public Object createGeometryKey(BlockAndTintGetter level, BlockPos pos, BlockState state, RandomSource random) {
         var key = super.createGeometryKey(level, pos, state, random);
-        if (key == null || !DeepRule.applies(level, pos)) return key;
-        return new DeepKey(key);
+        if (key == null) return null;
+        var texture = DeepRule.resolve(ore, level, pos);
+        return texture == null ? key : new DeepKey(key, texture);
     }
 
     @Override
     public int materialFlags(BlockAndTintGetter level, BlockPos pos, BlockState state, RandomSource random) {
-        if (!DeepRule.applies(level, pos)) return super.materialFlags(level, pos, state, random);
-        return variant.deepMaterialFlags(wrapped);
+        var texture = DeepRule.resolve(ore, level, pos);
+        if (texture == null) return super.materialFlags(level, pos, state, random);
+        return variant.deepMaterialFlags(wrapped, texture);
     }
 
     @Override
@@ -57,9 +65,10 @@ public final class DeepDebrisFabricModel extends WrapperBlockStateModel {
 
     @Override
     public Material.Baked particleMaterial(BlockAndTintGetter level, BlockPos pos, BlockState state) {
-        if (!DeepRule.applies(level, pos)) return super.particleMaterial(level, pos, state);
-        return variant.deepParticleMaterial(wrapped);
+        var texture = DeepRule.resolve(ore, level, pos);
+        if (texture == null) return super.particleMaterial(level, pos, state);
+        return variant.deepParticleMaterial(wrapped, texture);
     }
 
-    private record DeepKey(Object inner) { }
+    private record DeepKey(Object inner, TextureVariant texture) { }
 }

@@ -3,19 +3,27 @@ package winord.deepdebris.render;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.BlockAndTintGetter;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.Level;
+import org.jspecify.annotations.Nullable;
 import winord.deepdebris.config.DeepDebrisConfig;
+import winord.deepdebris.config.OreType;
 
 public final class DeepRule {
     private DeepRule() { }
 
-    public static boolean applies(BlockAndTintGetter level, BlockPos pos) {
-        if (level == BlockAndTintGetter.EMPTY) return false;
+    @Nullable
+    public static TextureVariant resolve(OreType ore, BlockAndTintGetter level, BlockPos pos) {
+        if (level == BlockAndTintGetter.EMPTY) return null;
 
         var snapshot = DeepDebrisConfig.get();
-        if (!snapshot.enabled() || pos.getY() >= snapshot.threshold()) return false;
+        if (!snapshot.enabled()) return null;
+
+        var settings = snapshot.ore(ore);
+        if (!settings.enabled()) return null;
+        if (settings.heightLimit() && !settings.containsY(pos.getY())) return null;
 
         var world = Minecraft.getInstance().level;
-        return world != null && world.dimension() == Level.NETHER;
+        if (world == null || !settings.dimension().matches(world.dimension())) return null;
+
+        return TextureVariant.of(settings);
     }
 }
