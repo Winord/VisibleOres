@@ -1,22 +1,21 @@
 {
     "schemaVersion": 1,
-    "id": "deepdebris",
+    "id": "visibleores",
     "version": "${version}",
-    "name": "Deep Debris",
+    "name": "Visible Ores",
     "description": "A client-side mod that swaps ore textures per ore, dimension and height, with Standard, Fancy and Custom texture sets",
     "authors": [
         "Winord"
     ],
     "contact": {
-        "issues": "https://github.com/Winord/DeepDebris/issues"
+        "issues": "https://github.com/Winord/VisibleOres/issues"
     },
     "license": "All Rights Reserved",
-    "icon": "assets/deepdebris/icon.png",
+    "icon": "assets/visibleores/icon.png",
     "environment": "client",
     "entrypoints": {
-        "main":    [ "winord.deepdebris.fabric.DeepDebrisFabric" ],
-        "client":  [ "winord.deepdebris.fabric.DeepDebrisFabricClient" ],
-        "modmenu": [ "winord.deepdebris.fabric.ModMenuIntegration" ]
+        "client":  [ "winord.visibleores.fabric.VisibleOresFabricClient" ],
+        "modmenu": [ "winord.visibleores.fabric.ModMenuIntegration" ]
     },
     "depends": {
         "fabricloader": ">=0.19.5",

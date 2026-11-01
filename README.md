@@ -1,5 +1,5 @@
-# Deep Debris
-Deep Debris is a small **client-side** mod that swaps the textures of 20 ores (Nether and Overworld, Stone and
+# Visible Ores
+Visible Ores is a small **client-side** mod that swaps the textures of 20 ores (Nether and Overworld, Stone and
 Deepslate variants) per ore, dimension and height range. Texture sets: Standard, Fancy (animated, emissive, connected
 with Continuity) and Custom (any resource pack from `resourcepacks`). Nothing needs to be installed on the server.
 

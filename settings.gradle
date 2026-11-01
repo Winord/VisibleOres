@@ -11,7 +11,7 @@ if (JavaVersion.current().ordinal() + 1 < 25) {
     throw new IllegalStateException("Please run Gradle with Java 25+ (Minecraft 26.1 requires it).")
 }
 
-rootProject.name = "deepdebris"
+rootProject.name = "visibleores"
 
 include("common")
 include("fabric")

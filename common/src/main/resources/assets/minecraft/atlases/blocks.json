@@ -1,7 +1,7 @@
 {
   "sources": [
     {
-      "type": "deepdebris:custom_pack_texture"
+      "type": "visibleores:ore_sprites"
     }
   ]
 }
