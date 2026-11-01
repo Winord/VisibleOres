@@ -38,7 +38,7 @@ public final class DeepDebrisFabricModel extends WrapperBlockStateModel {
         }
 
         var parts = new ArrayList<BlockStateModelPart>();
-        variant.collectDeepParts(wrapped, random, texture, parts);
+        variant.collectDeepParts(wrapped, state, random, texture, parts);
         for (var part : parts) part.emitQuads(emitter, cullTest);
     }
 
@@ -55,7 +55,7 @@ public final class DeepDebrisFabricModel extends WrapperBlockStateModel {
     public int materialFlags(BlockAndTintGetter level, BlockPos pos, BlockState state, RandomSource random) {
         var texture = DeepRule.resolve(ore, level, pos);
         if (texture == null) return super.materialFlags(level, pos, state, random);
-        return variant.deepMaterialFlags(wrapped, texture);
+        return variant.deepMaterialFlags(wrapped, state, texture);
     }
 
     @Override
@@ -67,7 +67,7 @@ public final class DeepDebrisFabricModel extends WrapperBlockStateModel {
     public Material.Baked particleMaterial(BlockAndTintGetter level, BlockPos pos, BlockState state) {
         var texture = DeepRule.resolve(ore, level, pos);
         if (texture == null) return super.particleMaterial(level, pos, state);
-        return variant.deepParticleMaterial(wrapped, texture);
+        return variant.deepParticleMaterial(wrapped, state, texture);
     }
 
     private record DeepKey(Object inner, TextureVariant texture) { }

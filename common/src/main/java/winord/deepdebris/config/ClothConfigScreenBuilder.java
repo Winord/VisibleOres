@@ -1,19 +1,21 @@
 package winord.deepdebris.config;
 
 import com.mojang.blaze3d.platform.InputConstants;
+import me.shedaniel.clothconfig2.api.AbstractConfigListEntry;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import me.shedaniel.clothconfig2.api.Requirement;
 import me.shedaniel.clothconfig2.gui.entries.BooleanListEntry;
-import me.shedaniel.clothconfig2.gui.entries.DropdownBoxEntry;
 import me.shedaniel.clothconfig2.gui.entries.EnumListEntry;
 import me.shedaniel.clothconfig2.gui.entries.IntegerListEntry;
 import me.shedaniel.clothconfig2.gui.entries.KeyCodeEntry;
+import me.shedaniel.clothconfig2.gui.entries.DropdownBoxEntry;
 import me.shedaniel.clothconfig2.gui.entries.SubCategoryListEntry;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import winord.deepdebris.input.KeybindHandler;
 
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
@@ -45,17 +47,16 @@ public final class ClothConfigScreenBuilder {
 
         var nether = builder.getOrCreateCategory(Component.translatable(key("category.nether")));
         for (var ore : OreType.values()) {
-            if (ore.group() == OreGroup.NETHER) nether.addEntry(oreEntries.get(ore).subCategory(entries));
+            if (ore.group() == OreGroup.NETHER) nether.addEntry(oreEntries.get(ore).subCategory());
         }
 
         var overworld = builder.getOrCreateCategory(Component.translatable(key("category.overworld")));
         for (var group : List.of(OreGroup.STONE, OreGroup.DEEPSLATE)) {
-            var groupBuilder = entries.startSubCategory(Component.translatable(key("group." + group.name().toLowerCase(Locale.ROOT))));
-            groupBuilder.setExpanded(false);
+            var children = new ArrayList<AbstractConfigListEntry>();
             for (var ore : OreType.values()) {
-                if (ore.group() == group) groupBuilder.add(oreEntries.get(ore).subCategory(entries));
+                if (ore.group() == group) children.add(oreEntries.get(ore).subCategory());
             }
-            overworld.addEntry(groupBuilder.build());
+            overworld.addEntry(new GuardedSubCategory(Component.translatable(key("group." + group.name().toLowerCase(Locale.ROOT))), children));
         }
 
         var keybinds = builder.getOrCreateCategory(Component.translatable(key("category.keybinds")));
@@ -177,18 +178,17 @@ public final class ClothConfigScreenBuilder {
                     : null;
         }
 
-        SubCategoryListEntry subCategory(ConfigEntryBuilder entries) {
-            var sub = entries.startSubCategory(ore.displayName());
-            sub.setExpanded(false);
-            sub.add(enabled);
-            sub.add(dimension);
-            sub.add(heightLimit);
-            sub.add(minY);
-            sub.add(maxY);
-            sub.add(texture);
-            sub.add(pack);
-            if (blue != null) sub.add(blue);
-            return sub.build();
+        SubCategoryListEntry subCategory() {
+            var children = new ArrayList<AbstractConfigListEntry>();
+            children.add(enabled);
+            children.add(dimension);
+            children.add(heightLimit);
+            children.add(minY);
+            children.add(maxY);
+            children.add(texture);
+            children.add(pack);
+            if (blue != null) children.add(blue);
+            return new GuardedSubCategory(ore.displayName(), children);
         }
 
         OreSettings read() {

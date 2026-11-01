@@ -6,8 +6,6 @@ import net.minecraft.network.chat.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-import static winord.deepdebris.DeepDebris.MOD_ID;
-
 public final class CustomPacks {
     private static final String FOLDER_PREFIX = "file/";
 
@@ -26,9 +24,7 @@ public final class CustomPacks {
     }
 
     static List<String> selections(String current) {
-        var names = new ArrayList<String>();
-        names.add("");
-        names.addAll(availableNames());
+        var names = availableNames();
         var normalized = normalize(current);
         if (!normalized.isEmpty() && !names.contains(normalized)) names.add(normalized);
         return names;
@@ -39,7 +35,6 @@ public final class CustomPacks {
     }
 
     static Component displayName(String name) {
-        if (name.isEmpty()) return Component.translatable("config." + MOD_ID + ".custom_pack.none");
         return Component.literal(name);
     }
 }

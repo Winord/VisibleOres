@@ -31,20 +31,20 @@ public final class DeepDebrisNeoForgeModel extends DelegateBlockStateModel {
             super.collectParts(level, pos, state, random, parts);
             return;
         }
-        variant.collectDeepParts(delegate, random, texture, parts);
+        variant.collectDeepParts(delegate, state, random, texture, parts);
     }
 
     @Override
     public int materialFlags(BlockAndTintGetter level, BlockPos pos, BlockState state) {
         var texture = DeepRule.resolve(ore, level, pos);
         if (texture == null) return super.materialFlags(level, pos, state);
-        return variant.deepMaterialFlags(delegate, texture);
+        return variant.deepMaterialFlags(delegate, state, texture);
     }
 
     @Override
     public Material.Baked particleMaterial(BlockAndTintGetter level, BlockPos pos, BlockState state) {
         var texture = DeepRule.resolve(ore, level, pos);
         if (texture == null) return super.particleMaterial(level, pos, state);
-        return variant.deepParticleMaterial(delegate, texture);
+        return variant.deepParticleMaterial(delegate, state, texture);
     }
 }

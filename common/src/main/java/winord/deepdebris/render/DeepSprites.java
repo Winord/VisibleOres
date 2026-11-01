@@ -34,10 +34,6 @@ public final class DeepSprites {
 
         var atlas = Minecraft.getInstance().getAtlasManager().getAtlasOrThrow(AtlasIds.BLOCKS);
         var sprite = lookup(atlas, variant, slot);
-        if (sprite == null && variant == TextureVariant.CUSTOM) {
-            sprite = lookup(atlas, TextureVariant.STANDARD, slot);
-            if (sprite != null) DeepDebris.LOGGER.warn("Texture {} is missing, {} uses the standard texture", variant.spriteId(slot), original);
-        }
         if (sprite == null) {
             if (failed.add(key)) DeepDebris.LOGGER.warn("Texture {} is missing, {} stays vanilla", variant.spriteId(slot), original);
             return null;
