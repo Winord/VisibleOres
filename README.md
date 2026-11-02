@@ -9,4 +9,4 @@ Bundled textures:
 - Animated Ore with Frames: https://modrinth.com/resourcepack/animated-ore-with-frames
 
 ## License
-All Rights Reserved — see [`LICENSE`](LICENSE).
+GPLv3 — see [`LICENSE`](LICENSE).

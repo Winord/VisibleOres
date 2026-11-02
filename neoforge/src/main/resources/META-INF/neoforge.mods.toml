@@ -1,6 +1,6 @@
 modLoader = "javafml"
 loaderVersion = "[1,)"
-license = "All Rights Reserved"
+license = "GPLv3"
 issueTrackerURL = "https://github.com/Winord/VisibleOres/issues"
 
 [[mods]]
