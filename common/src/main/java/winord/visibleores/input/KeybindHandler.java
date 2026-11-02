@@ -43,7 +43,7 @@ public final class KeybindHandler {
 
     private static void tick(Minecraft minecraft) {
         var snapshot = VisibleOresConfig.get();
-        var active = minecraft.level != null && minecraft.screen == null;
+        var active = minecraft.level != null && minecraft.gui.screen() == null;
 
         if (justPressed(minecraft, snapshot, ConfigSnapshot.MASTER_KEY) && active) {
             var enabled = VisibleOresConfig.toggleMaster();
@@ -72,6 +72,6 @@ public final class KeybindHandler {
     }
 
     private static void show(Minecraft minecraft, Component message) {
-        minecraft.gui.setOverlayMessage(message, false);
+        minecraft.gui.hud.setOverlayMessage(message, false);
     }
 }

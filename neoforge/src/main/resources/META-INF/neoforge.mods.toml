@@ -14,21 +14,21 @@ logoFile = "icon.png"
 [[dependencies.visibleores]]
     modId = "neoforge"
     type = "required"
-    versionRange = "[26.1,)"
+    versionRange = "[26.2,)"
     ordering = "NONE"
     side = "CLIENT"
 
 [[dependencies.visibleores]]
     modId = "minecraft"
     type = "required"
-    versionRange = "[26.1,26.2)"
+    versionRange = "[26.2,26.3)"
     ordering = "NONE"
     side = "CLIENT"
 
 [[dependencies.visibleores]]
     modId = "architectury"
     type = "required"
-    versionRange = "[20,)"
+    versionRange = "[21,)"
     ordering = "NONE"
     side = "CLIENT"
 

@@ -30,7 +30,7 @@ public final class VisibleOresConfig {
             if (OreSpriteSource.needsReload(next)) {
                 minecraft.reloadResourcePacks();
             } else if (minecraft.level != null) {
-                minecraft.levelRenderer.allChanged();
+                minecraft.levelExtractor.allChanged();
             }
         });
     }

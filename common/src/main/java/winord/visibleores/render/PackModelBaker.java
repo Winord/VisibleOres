@@ -3,6 +3,7 @@ package winord.visibleores.render;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModelPart;
 import net.minecraft.client.renderer.texture.TextureAtlas;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.ModelBaker;
 import net.minecraft.client.resources.model.ModelDebugName;
 import net.minecraft.client.resources.model.ResolvedModel;
@@ -22,7 +23,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 final class PackModelBaker implements ModelBaker {
     private final PackModelPlan plan;
-    private final MaterialBaker materials = new Materials();
+    private final Object materialsLock = new Object();
+    private volatile MaterialBaker materials;
     private final ModelBaker.Interner interner = new IdentityInterner();
     private final Map<ModelBaker.SharedOperationKey<Object>, Object> operations = new ConcurrentHashMap<>();
     private final Set<Identifier> reported = ConcurrentHashMap.newKeySet();
@@ -45,7 +47,12 @@ final class PackModelBaker implements ModelBaker {
 
     @Override
     public MaterialBaker materials() {
-        return materials;
+        var current = materials;
+        if (current != null) return current;
+        synchronized (materialsLock) {
+            if (materials == null) materials = new Materials(atlas().missingSprite());
+            return materials;
+        }
     }
 
     @Override
@@ -63,7 +70,11 @@ final class PackModelBaker implements ModelBaker {
         return Minecraft.getInstance().getAtlasManager().getAtlasOrThrow(AtlasIds.BLOCKS);
     }
 
-    private final class Materials implements MaterialBaker {
+    private final class Materials extends MaterialBaker {
+        Materials(TextureAtlasSprite missingSprite) {
+            super(missingSprite);
+        }
+
         @Override
         public Material.Baked get(Material material, ModelDebugName name) {
             var atlas = atlas();
@@ -73,6 +84,11 @@ final class PackModelBaker implements ModelBaker {
                 VisibleOres.LOGGER.warn("Texture {} of custom pack model {} is missing from the block atlas", id, name.debugName());
             }
             return new Material.Baked(sprite, material.forceTranslucent());
+        }
+
+        @Override
+        protected Material.Baked bake(Material material) {
+            return new Material.Baked(atlas().getSprite(plan.sprite(material.sprite())), material.forceTranslucent());
         }
 
         @Override
