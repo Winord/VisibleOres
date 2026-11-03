@@ -60,8 +60,8 @@ public final class KeybindHandler {
     private static boolean justPressed(Minecraft minecraft, ConfigSnapshot snapshot, String id) {
         var key = parse(snapshot.keybind(id));
         var pressed = !key.equals(InputConstants.UNKNOWN)
-                && key.getType() == InputConstants.Type.KEYSYM
-                && InputConstants.isKeyDown(minecraft.getWindow(), key.getValue());
+                && key.getType() == InputConstants.Type.KEYBOARD
+                && InputConstants.isKeyDown(key.getValue());
         var wasDown = WAS_DOWN.getOrDefault(id, false);
         WAS_DOWN.put(id, pressed);
         return pressed && !wasDown;

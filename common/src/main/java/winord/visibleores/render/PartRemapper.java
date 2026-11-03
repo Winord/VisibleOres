@@ -42,7 +42,8 @@ final class PartRemapper {
         if (target == null) return quad;
 
         var targetInfo = new BakedQuad.MaterialInfo(target, info.layer(), info.itemRenderType(),
-                info.tintIndex(), info.shade(), info.lightEmission());
+                info.itemGlintRenderType(), info.itemGlintSpecialRenderType(),
+                info.tintIndex(), info.shadeDirectionOverride(), info.lightEmission());
         return new BakedQuad(
                 quad.position0(), quad.position1(), quad.position2(), quad.position3(),
                 remapUv(quad.packedUV0(), original, target),

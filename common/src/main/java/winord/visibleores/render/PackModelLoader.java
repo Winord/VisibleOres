@@ -26,6 +26,7 @@ import winord.visibleores.config.OreType;
 
 import java.io.IOException;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -37,29 +38,33 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 final class PackModelLoader {
     private final OreType ore;
     private final String packName;
-    private final String packId;
+    private final Set<String> packIds;
     private final MultiPackResourceManager stack;
     @Nullable
     private final String activeSuffix;
     private final SpriteSource.Output output;
     private boolean usesPack;
 
-    private PackModelLoader(OreType ore, String packName, PackResources pack, @Nullable String activeSuffix, SpriteSource.Output output) {
+    private PackModelLoader(OreType ore, String packName, List<PackResources> packs, @Nullable String activeSuffix, SpriteSource.Output output) {
         this.ore = ore;
         this.packName = packName;
-        this.packId = pack.packId();
-        this.stack = new MultiPackResourceManager(PackType.CLIENT_RESOURCES, List.of(Minecraft.getInstance().getVanillaPackResources(), pack));
+        this.packIds = packs.stream().map(PackResources::packId).collect(Collectors.toUnmodifiableSet());
+        var layers = new ArrayList<PackResources>();
+        layers.add(Minecraft.getInstance().getVanillaPackResources().fullResources());
+        layers.addAll(packs);
+        this.stack = new MultiPackResourceManager(PackType.CLIENT_RESOURCES, layers);
         this.activeSuffix = activeSuffix;
         this.output = output;
     }
 
     @Nullable
-    static PackModelPlan load(OreType ore, String packName, PackResources pack, @Nullable String activeSuffix, SpriteSource.Output output) throws IOException {
-        return new PackModelLoader(ore, packName, pack, activeSuffix, output).load();
+    static PackModelPlan load(OreType ore, String packName, List<PackResources> packs, @Nullable String activeSuffix, SpriteSource.Output output) throws IOException {
+        return new PackModelLoader(ore, packName, packs, activeSuffix, output).load();
     }
 
     @Nullable
@@ -191,6 +196,6 @@ final class PackModelLoader {
     }
 
     private boolean isFromPack(Resource resource) {
-        return packId.equals(resource.sourcePackId());
+        return packIds.contains(resource.sourcePackId());
     }
 }

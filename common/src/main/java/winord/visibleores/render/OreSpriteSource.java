@@ -4,6 +4,7 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.atlas.SpriteSource;
 import net.minecraft.resources.Identifier;
+import net.minecraft.server.packs.PackResources;
 import net.minecraft.server.packs.repository.PackRepository;
 import net.minecraft.server.packs.resources.ResourceManager;
 import org.jspecify.annotations.Nullable;
@@ -63,14 +64,14 @@ public record OreSpriteSource() implements SpriteSource {
             return null;
         }
 
-        var resources = pack.open();
+        var resources = pack.open().toList();
         try {
             return PackModelLoader.load(ore, packName, resources, activeSuffix, output);
         } catch (IOException | RuntimeException e) {
             VisibleOres.LOGGER.warn("Could not load {} from resource pack {}", ore.key(), packName, e);
             return null;
         } finally {
-            resources.close();
+            resources.forEach(PackResources::close);
         }
     }
 

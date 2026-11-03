@@ -5,7 +5,6 @@ import net.minecraft.client.gui.components.MultiLineTextWidget;
 import net.minecraft.client.gui.screens.ConfirmLinkScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
-import net.minecraft.util.Util;
 import winord.visibleores.util.Lang;
 
 import java.net.URI;
@@ -30,10 +29,7 @@ public final class MissingClothScreen extends Screen {
         addRenderableWidget(message);
 
         addRenderableWidget(Button.builder(Lang.config("missing_cloth.modrinth"),
-                        b -> minecraft.gui.setScreen(new ConfirmLinkScreen(confirmed -> {
-                            if (confirmed) Util.getPlatform().openUri(CLOTH_CONFIG_URL);
-                            minecraft.gui.setScreen(this);
-                        }, CLOTH_CONFIG_URL.toString(), true)))
+                        ConfirmLinkScreen.confirmLink(this, CLOTH_CONFIG_URL, true))
                 .pos(width / 2 - 115, height / 2 - 10)
                 .size(230, 20)
                 .build());
