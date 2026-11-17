@@ -15,12 +15,12 @@ import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.ItemStack;
 import org.jspecify.annotations.Nullable;
 import winord.visibleores.config.ConfigSnapshot;
 import winord.visibleores.config.OreGroup;
 import winord.visibleores.config.OreType;
 import winord.visibleores.input.KeybindHandler;
+import winord.visibleores.render.OrePreviews;
 import winord.visibleores.util.Lang;
 
 import java.util.ArrayList;
@@ -33,16 +33,18 @@ final class KeybindsScreen extends Screen {
 
     private final Screen parent;
     private final ConfigDraft draft;
+    private final OrePreviews previews;
     private final List<KeyRow> rows = new ArrayList<>();
     private HeaderAndFooterLayout layout;
     private ConfigList list;
     @Nullable
     private KeyRow listening;
 
-    KeybindsScreen(Screen parent, ConfigDraft draft) {
+    KeybindsScreen(Screen parent, ConfigDraft draft, OrePreviews previews) {
         super(Lang.config("category.keybinds"));
         this.parent = parent;
         this.draft = draft;
+        this.previews = previews;
     }
 
     @Override
@@ -58,7 +60,7 @@ final class KeybindsScreen extends Screen {
         for (var group : OreGroup.values()) {
             list.header(VisibleOresConfigScreen.groupTitle(group));
             for (var ore : OreType.inGroup(group)) {
-                addRow(ore.key(), ore.displayName(), Lang.config("keybinds.ore.tooltip"), VisibleOresConfigScreen.icon(ore));
+                addRow(ore.key(), ore.displayName(), Lang.config("keybinds.ore.tooltip"), ore);
             }
         }
 
@@ -106,8 +108,8 @@ final class KeybindsScreen extends Screen {
         minecraft.gui.setScreen(parent);
     }
 
-    private void addRow(String id, Component name, Component tooltip, @Nullable ItemStack icon) {
-        var row = new KeyRow(id, name, tooltip, icon);
+    private void addRow(String id, Component name, Component tooltip, @Nullable OreType ore) {
+        var row = new KeyRow(id, name, tooltip, ore);
         rows.add(row);
         list.add(row);
     }
@@ -120,15 +122,15 @@ final class KeybindsScreen extends Screen {
         private final String id;
         private final Component name;
         @Nullable
-        private final ItemStack icon;
+        private final OreType ore;
         private final Button key;
         private final Button clear;
         private final Tooltip tooltip;
 
-        KeyRow(String id, Component name, Component tooltip, @Nullable ItemStack icon) {
+        KeyRow(String id, Component name, Component tooltip, @Nullable OreType ore) {
             this.id = id;
             this.name = name;
-            this.icon = icon;
+            this.ore = ore;
             this.key = Button.builder(Component.empty(), button -> {
                 listening = this;
                 KeybindsScreen.this.refresh();
@@ -166,8 +168,8 @@ final class KeybindsScreen extends Screen {
 
             if (hovered) graphics.fill(x - 2, getContentY() - 1, getContentRight() + 2, getContentY() + getContentHeight() + 1, 0x18FFFFFF);
             var textX = x + 2;
-            if (icon != null) {
-                graphics.item(icon, x + 2, middle - 8);
+            if (ore != null) {
+                BlockPreview.draw(graphics, previews.vanilla(ore), x + 2 + (16 - BlockPreview.width(18)) / 2F, middle - 9, 18);
                 textX = x + 24;
             }
 

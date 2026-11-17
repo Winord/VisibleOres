@@ -75,5 +75,6 @@
   "config.visibleores.blocks_only.tooltip": "Applies only to placed blocks, so it does nothing while only Item is selected.",
   "config.visibleores.texture.tooltip_basic": "Standard: textures of the Vanilla Tweaks packs.\nCustom: textures from the resource pack chosen below (placed blocks only).",
   "config.visibleores.preview.block": "Block",
-  "config.visibleores.preview.item": "Item"
+  "config.visibleores.preview.item": "Item",
+  "config.visibleores.preview.item_no_world": "A simplified preview: the real item is shown once you are in a world."
 }

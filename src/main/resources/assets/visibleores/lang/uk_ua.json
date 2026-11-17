@@ -75,5 +75,6 @@
   "config.visibleores.blocks_only.tooltip": "Діє лише на поставлені блоки, тож поки обрано тільки Предмет, нічого не змінює.",
   "config.visibleores.texture.tooltip_basic": "Стандартна: текстури з паків Vanilla Tweaks.\nВласна: текстури з ресурс-пака, обраного нижче (лише для поставлених блоків).",
   "config.visibleores.preview.block": "Блок",
-  "config.visibleores.preview.item": "Предмет"
+  "config.visibleores.preview.item": "Предмет",
+  "config.visibleores.preview.item_no_world": "Спрощене прев'ю: справжній предмет видно, коли ви у світі."
 }

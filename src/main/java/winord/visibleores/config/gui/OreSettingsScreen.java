@@ -14,6 +14,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
+import org.jspecify.annotations.Nullable;
 import winord.visibleores.config.ApplyMode;
 import winord.visibleores.config.ConfigPreview;
 import winord.visibleores.config.DimensionFilter;
@@ -33,6 +34,7 @@ final class OreSettingsScreen extends Screen {
     private final ConfigDraft draft;
     private final OrePreviews previews;
     private final OreType ore;
+    @Nullable
     private final ItemStack icon;
     private HeaderAndFooterLayout layout;
     private ConfigList list;
@@ -193,15 +195,24 @@ final class OreSettingsScreen extends Screen {
             var block = previews.cube(ore, draft.ore(ore), draft.enabled);
             BlockPreview.draw(graphics, previews.vanilla(ore), middle - SPACING - cubeWidth / 2F, y, CUBE);
             BlockPreview.draw(graphics, block, middle - cubeWidth / 2F, y, CUBE);
-            drawItem(graphics, middle + SPACING, y + CUBE / 2);
+            if (icon != null) {
+                drawItem(graphics, middle + SPACING, y + CUBE / 2);
+            } else {
+                BlockPreview.draw(graphics, previews.cube(ore, draft.ore(ore).withApply(ApplyMode.BOTH), draft.enabled),
+                        middle + SPACING - cubeWidth / 2F, y, CUBE);
+            }
 
             graphics.centeredText(font, Lang.config("preview.vanilla"), middle - SPACING, labelY, 0xFFA0A0A0);
             var blockLabel = block.approximate() ? Lang.config("preview.block").append("*") : Lang.config("preview.block");
             graphics.centeredText(font, blockLabel, middle, labelY, 0xFFFFFFFF);
-            graphics.centeredText(font, Lang.config("preview.item"), middle + SPACING, labelY, 0xFFFFFFFF);
+            var itemLabel = icon == null ? Lang.config("preview.item").append("*") : Lang.config("preview.item");
+            graphics.centeredText(font, itemLabel, middle + SPACING, labelY, 0xFFFFFFFF);
 
             if (block.approximate() && Math.abs(mouseX - middle) <= 40 && mouseY >= y && mouseY <= labelY + 9) {
                 graphics.setTooltipForNextFrame(font, Lang.config("preview.approximate"), mouseX, mouseY);
+            }
+            if (icon == null && Math.abs(mouseX - middle - SPACING) <= 40 && mouseY >= y && mouseY <= labelY + 9) {
+                graphics.setTooltipForNextFrame(font, Lang.config("preview.item_no_world"), mouseX, mouseY);
             }
         }
 

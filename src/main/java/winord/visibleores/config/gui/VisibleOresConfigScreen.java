@@ -16,6 +16,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
+import org.jspecify.annotations.Nullable;
 import winord.visibleores.config.ApplyMode;
 import winord.visibleores.config.ConfigPreview;
 import winord.visibleores.config.OreGroup;
@@ -64,7 +65,7 @@ public final class VisibleOresConfigScreen extends Screen {
         }
 
         var footer = layout.addToFooter(LinearLayout.horizontal().spacing(8));
-        footer.addChild(Button.builder(Lang.config("screen.keybinds"), button -> open(new KeybindsScreen(this, draft))).width(100).build());
+        footer.addChild(Button.builder(Lang.config("screen.keybinds"), button -> open(new KeybindsScreen(this, draft, previews))).width(100).build());
         footer.addChild(Button.builder(Lang.config("screen.reset_all"), button -> confirmReset()).width(100).build());
         footer.addChild(Button.builder(CommonComponents.GUI_DONE, button -> onClose()).width(100).build());
 
@@ -114,8 +115,10 @@ public final class VisibleOresConfigScreen extends Screen {
         return Lang.message(value ? "on" : "off").withStyle(value ? ChatFormatting.GREEN : ChatFormatting.RED);
     }
 
+    @Nullable
     static ItemStack icon(OreType ore) {
-        return new ItemStack(ore.iconBlock());
+        var item = ore.iconBlock().asItem();
+        return item.builtInRegistryHolder().areComponentsBound() ? new ItemStack(item) : null;
     }
 
     static String fit(Font font, String text, int width) {
@@ -145,6 +148,7 @@ public final class VisibleOresConfigScreen extends Screen {
 
     private final class OreRow extends ConfigList.Row {
         private final OreType ore;
+        @Nullable
         private final ItemStack icon;
         private final CycleButton<Boolean> toggle;
         private final Button edit;
@@ -176,10 +180,12 @@ public final class VisibleOresConfigScreen extends Screen {
             var middle = y + getContentHeight() / 2;
 
             if (hovered) graphics.fill(x - 2, y - 1, getContentRight() + 2, y + getContentHeight() + 1, 0x18FFFFFF);
-            if (draft.ore(ore).apply().blocks()) {
-                BlockPreview.draw(graphics, previews.cube(ore, draft.ore(ore), draft.enabled), x + 2 + (16 - BlockPreview.width(18)) / 2F, middle - 9, 18);
-            } else {
+            var settings = draft.ore(ore);
+            if (!settings.apply().blocks() && icon != null) {
                 ConfigPreview.with(draft.toSnapshot(), () -> graphics.item(icon, x + 2, middle - 8));
+            } else {
+                var shown = settings.apply().blocks() ? settings : settings.withApply(ApplyMode.BOTH);
+                BlockPreview.draw(graphics, previews.cube(ore, shown, draft.enabled), x + 2 + (16 - BlockPreview.width(18)) / 2F, middle - 9, 18);
             }
 
             edit.setPosition(getContentRight() - EDIT_WIDTH, middle - 10);
