@@ -10,7 +10,7 @@
     "contact": {
         "issues": "https://github.com/Winord/VisibleOres/issues"
     },
-    "license": "GPLv3",
+    "license": "GPL-3.0-only",
     "icon": "assets/visibleores/icon.png",
     "environment": "client",
     "entrypoints": {
