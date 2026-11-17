@@ -1,7 +1,7 @@
 mod.id = "visibleores"
 mod.name = "Visible Ores"
 mod.group = "winord.visibleores"
-mod.version = "0.1"
+mod.version = "1.0.0"
 
 deps.fabric_loader = "0.19.5"
 loomx.loom_version = "1.19-SNAPSHOT"
