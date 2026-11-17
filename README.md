@@ -9,7 +9,7 @@ Every entry can be applied to placed blocks, to items, or to both.
 ## Credits
 Bundled textures:
 - Vanilla Tweaks: https://vanillatweaks.net/ (ores, Suspicious Sand & Gravel Borders, Budding Amethyst Borders,
-  Visual Infested Stone Items, Visual Waxed Copper Items; refresh them with `tools/import_vanilla_tweaks.py`)
+  Visual Infested Stone Items, Visual Waxed Copper Items;
 - Animated Ore with Frames: https://modrinth.com/resourcepack/animated-ore-with-frames
 
 ## License
