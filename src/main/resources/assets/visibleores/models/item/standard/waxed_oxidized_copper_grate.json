@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/copper_block",
+  "textures": {
+    "all": "visibleores:item/standard/waxed_oxidized_copper_grate"
+  }
+}

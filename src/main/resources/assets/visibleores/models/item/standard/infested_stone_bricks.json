@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "visibleores:item/standard/infested_stone_bricks"
+  }
+}

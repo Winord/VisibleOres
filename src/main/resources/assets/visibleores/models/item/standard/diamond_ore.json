@@ -1,0 +1,52 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "visibleores:block/standard/diamond_ore",
+    "t_down": "visibleores:block/standard/diamond_ore",
+    "t_up": "visibleores:block/standard/diamond_ore",
+    "t_north": "visibleores:block/standard/diamond_ore",
+    "t_south": "visibleores:block/standard/diamond_ore",
+    "t_west": "visibleores:block/standard/diamond_ore",
+    "t_east": "visibleores:block/standard/diamond_ore"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "faces": {
+        "down": {
+          "texture": "#t_down",
+          "cullface": "down"
+        },
+        "up": {
+          "texture": "#t_up",
+          "cullface": "up"
+        },
+        "north": {
+          "texture": "#t_north",
+          "cullface": "north"
+        },
+        "south": {
+          "texture": "#t_south",
+          "cullface": "south"
+        },
+        "west": {
+          "texture": "#t_west",
+          "cullface": "west"
+        },
+        "east": {
+          "texture": "#t_east",
+          "cullface": "east"
+        }
+      }
+    }
+  ]
+}

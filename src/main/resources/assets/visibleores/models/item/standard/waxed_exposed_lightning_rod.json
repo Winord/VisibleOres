@@ -1,0 +1,7 @@
+{
+  "parent": "visibleores:item/standard/waxed_lightning_rod",
+  "textures": {
+    "particle": "block/exposed_lightning_rod",
+    "texture": "visibleores:item/standard/waxed_exposed_lightning_rod"
+  }
+}

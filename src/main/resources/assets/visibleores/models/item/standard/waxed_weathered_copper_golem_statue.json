@@ -1,0 +1,7 @@
+{
+  "parent": "visibleores:item/standard/waxed_copper_golem_statue",
+  "textures": {
+    "particle": "block/weathered_copper",
+    "texture": "visibleores:item/standard/waxed_weathered_copper_golem_statue"
+  }
+}

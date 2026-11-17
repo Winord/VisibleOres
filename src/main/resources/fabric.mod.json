@@ -1,0 +1,32 @@
+{
+    "schemaVersion": 1,
+    "id": "visibleores",
+    "version": "${version}",
+    "name": "Visible Ores",
+    "description": "A client-side mod that swaps ore textures per ore, dimension and height, with Standard, Fancy and Custom texture sets",
+    "authors": [
+        "Winord"
+    ],
+    "contact": {
+        "issues": "https://github.com/Winord/VisibleOres/issues"
+    },
+    "license": "GPLv3",
+    "icon": "assets/visibleores/icon.png",
+    "environment": "client",
+    "entrypoints": {
+        "client":  [ "winord.visibleores.fabric.VisibleOresFabricClient" ],
+        "modmenu": [ "winord.visibleores.fabric.ModMenuIntegration" ]
+    },
+    "mixins": [
+        "visibleores.mixins.json"
+    ],
+    "depends": {
+        "fabricloader": ">=${fabric_loader}",
+        "fabric-api": "*",
+        "minecraft": "${minecraft}",
+        "java": ">=${java}"
+    },
+    "suggests": {
+        "modmenu": "*"
+    }
+}

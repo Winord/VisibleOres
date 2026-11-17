@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "particle": "#north",
+    "down": "visibleores:item/standard/infested_deepslate_top",
+    "up": "visibleores:item/standard/infested_deepslate_top",
+    "north": "visibleores:item/standard/infested_deepslate",
+    "east": "visibleores:item/standard/infested_deepslate",
+    "south": "visibleores:item/standard/infested_deepslate",
+    "west": "visibleores:item/standard/infested_deepslate"
+  }
+}

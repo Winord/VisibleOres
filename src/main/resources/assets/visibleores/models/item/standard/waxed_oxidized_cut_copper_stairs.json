@@ -1,0 +1,12 @@
+{
+  "credit": "Created by Stridey",
+  "parent": "visibleores:item/standard/waxed_stairs",
+  "textures": {
+    "side1": "visibleores:item/standard/waxed_oxidized_copper_stairs1",
+    "side2": "visibleores:item/standard/waxed_oxidized_copper_stairs2",
+    "inner": "visibleores:item/standard/waxed_oxidized_copper_double2",
+    "double1": "visibleores:item/standard/waxed_oxidized_copper_double1",
+    "top": "visibleores:item/standard/waxed_oxidized_cut_copper",
+    "particle": "visibleores:item/standard/waxed_oxidized_cut_copper"
+  }
+}

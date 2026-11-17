@@ -1,0 +1,7 @@
+{
+  "parent": "visibleores:item/standard/waxed_copper_chest",
+  "textures": {
+    "texture": "visibleores:item/standard/waxed_weathered_copper_chest",
+    "particle": "block/weathered_copper"
+  }
+}

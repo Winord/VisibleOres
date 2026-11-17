@@ -1,0 +1,30 @@
+modLoader = "javafml"
+loaderVersion = "[1,)"
+license = "GPLv3"
+issueTrackerURL = "https://github.com/Winord/VisibleOres/issues"
+
+[[mods]]
+modId = "visibleores"
+version = "${version}"
+displayName = "Visible Ores"
+authors = "Winord"
+description = '''A client-side mod that swaps ore textures per ore, dimension and height, with Standard, Fancy and Custom texture sets'''
+logoFile = "icon.png"
+
+[[mixins]]
+config = "visibleores.mixins.json"
+
+[[dependencies.visibleores]]
+    modId = "neoforge"
+    type = "required"
+    versionRange = "${loader_compat}"
+    ordering = "NONE"
+    side = "CLIENT"
+
+[[dependencies.visibleores]]
+    modId = "minecraft"
+    type = "required"
+    versionRange = "${minecraft}"
+    ordering = "NONE"
+    side = "CLIENT"
+

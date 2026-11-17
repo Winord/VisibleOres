@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "visibleores:item/standard/waxed_cut_copper",
+    "top": "visibleores:item/standard/waxed_cut_copper",
+    "side": "visibleores:item/standard/waxed_copper_double1"
+  }
+}

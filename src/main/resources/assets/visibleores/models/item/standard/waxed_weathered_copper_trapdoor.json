@@ -1,0 +1,7 @@
+{
+  "parent": "visibleores:item/standard/waxed_copper_trapdoor",
+  "textures": {
+    "ends": "visibleores:item/standard/waxed_weathered_copper_trapdoor",
+    "sides": "visibleores:item/standard/waxed_weathered_copper_trapdoor_side"
+  }
+}

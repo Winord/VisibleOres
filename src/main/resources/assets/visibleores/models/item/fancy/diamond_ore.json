@@ -1,0 +1,97 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "visibleores:block/fancy/diamond_ore",
+    "t_down": "visibleores:block/fancy/diamond_ore",
+    "e_down": "visibleores:block/fancy/diamond_ore_e",
+    "t_up": "visibleores:block/fancy/diamond_ore",
+    "e_up": "visibleores:block/fancy/diamond_ore_e",
+    "t_north": "visibleores:block/fancy/diamond_ore",
+    "e_north": "visibleores:block/fancy/diamond_ore_e",
+    "t_south": "visibleores:block/fancy/diamond_ore",
+    "e_south": "visibleores:block/fancy/diamond_ore_e",
+    "t_west": "visibleores:block/fancy/diamond_ore",
+    "e_west": "visibleores:block/fancy/diamond_ore_e",
+    "t_east": "visibleores:block/fancy/diamond_ore",
+    "e_east": "visibleores:block/fancy/diamond_ore_e"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "faces": {
+        "down": {
+          "texture": "#t_down",
+          "cullface": "down"
+        },
+        "up": {
+          "texture": "#t_up",
+          "cullface": "up"
+        },
+        "north": {
+          "texture": "#t_north",
+          "cullface": "north"
+        },
+        "south": {
+          "texture": "#t_south",
+          "cullface": "south"
+        },
+        "west": {
+          "texture": "#t_west",
+          "cullface": "west"
+        },
+        "east": {
+          "texture": "#t_east",
+          "cullface": "east"
+        }
+      }
+    },
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "light_emission": 15,
+      "faces": {
+        "down": {
+          "texture": "#e_down",
+          "cullface": "down"
+        },
+        "up": {
+          "texture": "#e_up",
+          "cullface": "up"
+        },
+        "north": {
+          "texture": "#e_north",
+          "cullface": "north"
+        },
+        "south": {
+          "texture": "#e_south",
+          "cullface": "south"
+        },
+        "west": {
+          "texture": "#e_west",
+          "cullface": "west"
+        },
+        "east": {
+          "texture": "#e_east",
+          "cullface": "east"
+        }
+      }
+    }
+  ]
+}
