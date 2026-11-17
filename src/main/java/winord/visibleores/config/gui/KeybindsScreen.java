@@ -26,7 +26,6 @@ import winord.visibleores.util.Lang;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Toggle keys of the mod. Click a key button, then press a key; Esc removes the key. */
 final class KeybindsScreen extends Screen {
     private static final int ROW_WIDTH = 310;
     private static final int KEY_WIDTH = 96;

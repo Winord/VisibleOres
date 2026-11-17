@@ -20,7 +20,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import winord.visibleores.render.WaxedEntityTextures;
 import winord.visibleores.render.WaxedRenderState;
 
-/** Waxed copper chests use the waxed chest textures when Waxed Copper is applied to blocks. */
 @Mixin(ChestRenderer.class)
 public abstract class ChestRendererMixin {
     @Inject(method = "extractRenderState(Lnet/minecraft/world/level/block/entity/BlockEntity;Lnet/minecraft/client/renderer/blockentity/state/ChestRenderState;FLnet/minecraft/world/phys/Vec3;Lnet/minecraft/client/renderer/feature/ModelFeatureRenderer$CrumblingOverlay;)V",

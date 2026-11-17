@@ -2,10 +2,6 @@ package winord.visibleores.config;
 
 import org.jspecify.annotations.Nullable;
 
-/**
- * Settings the item renderer should use right now. The config screens draw items with their unsaved draft,
- * so they swap it in for the duration of the draw call; everything else sees the saved config.
- */
 public final class ConfigPreview {
     @Nullable
     private static ConfigSnapshot override;

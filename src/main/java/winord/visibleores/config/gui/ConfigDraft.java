@@ -8,7 +8,6 @@ import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
-/** Mutable copy of the config that the screens edit; it is applied only when the main screen closes. */
 final class ConfigDraft {
     boolean enabled;
     private final Map<OreType, OreSettings> ores = new EnumMap<>(OreType.class);

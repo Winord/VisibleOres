@@ -13,10 +13,6 @@ import winord.visibleores.config.OreType;
 
 import java.util.Locale;
 
-/**
- * Waxed copper chests and golem statues are drawn by block entity renderers, not block models, so they get their
- * waxed textures here: entity/chest/waxed_copper[_state][_left|_right] and entity/copper_golem/waxed_copper_golem[_state].
- */
 public final class WaxedEntityTextures {
     private WaxedEntityTextures() { }
 

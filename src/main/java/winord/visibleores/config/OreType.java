@@ -14,10 +14,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
-/**
- * One configurable entry: a single ore, or a family of blocks (infested blocks, waxed copper) sharing one setting.
- * {@link #textures()} maps the vanilla block texture names to the replacement texture names of the bundled sets.
- */
 public enum OreType {
     ANCIENT_DEBRIS(ore("ancient_debris", OreGroup.NETHER, DimensionFilter.NETHER, 8, 119)
             .textures("ancient_debris_side", "ancient_debris_top")),
@@ -115,7 +111,6 @@ public enum OreType {
         return defaultMaxY;
     }
 
-    /** Ores are on by default and have the animated Fancy set; the other blocks start disabled. */
     public boolean isOre() {
         return ore;
     }
@@ -124,7 +119,6 @@ public enum OreType {
         return defaultApply;
     }
 
-    /** Vanilla block texture name -> replacement texture name inside textures/block/{variant}/. */
     public Map<String, String> textures() {
         return textures;
     }
@@ -137,7 +131,6 @@ public enum OreType {
         return BuiltInRegistries.BLOCK.getValue(Identifier.withDefaultNamespace(iconBlock));
     }
 
-    /** Vanilla blocks covered by this entry. */
     public List<Block> blocks() {
         if (predicate == null) return List.of(iconBlock());
         return BuiltInRegistries.BLOCK.stream().filter(block -> covers(BuiltInRegistries.BLOCK.getKey(block))).toList();
@@ -156,7 +149,6 @@ public enum OreType {
         return of(BuiltInRegistries.BLOCK.getKey(state.getBlock()));
     }
 
-    /** The entry of a vanilla block or block item id. */
     @Nullable
     public static OreType of(Identifier id) {
         if (!Identifier.DEFAULT_NAMESPACE.equals(id.getNamespace())) return null;

@@ -28,7 +28,6 @@ import winord.visibleores.util.Lang;
 
 import java.util.List;
 
-/** Main config screen: the master switch and one row per ore with a quick toggle and a settings button. */
 public final class VisibleOresConfigScreen extends Screen {
     private static final int ROW_WIDTH = 310;
     private static final int ORE_ROW_HEIGHT = 28;
@@ -103,7 +102,6 @@ public final class VisibleOresConfigScreen extends Screen {
         }, Lang.config("screen.reset_all.title"), Lang.config("screen.reset_all.message")));
     }
 
-    /** Section title of an ore group, shared by the ore list and the keybinds screen. */
     static Component groupTitle(OreGroup group) {
         return switch (group) {
             case NETHER -> Lang.config("category.nether");
@@ -145,7 +143,6 @@ public final class VisibleOresConfigScreen extends Screen {
         return text;
     }
 
-    /** Ore icon, name and summary on the left; quick toggle and settings button on the right. */
     private final class OreRow extends ConfigList.Row {
         private final OreType ore;
         private final ItemStack icon;

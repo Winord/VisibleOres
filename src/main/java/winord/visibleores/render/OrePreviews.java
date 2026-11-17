@@ -25,16 +25,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-/**
- * Builds the faces of an ore block exactly as the world renderer would show them, for the config screens.
- * Bundled variants and already loaded custom packs come from the real baked model parts; a custom pack that is
- * not loaded yet is read straight from its files (first animation frame, vanilla model shape).
- * Owns the preview textures it uploads, so {@link #close()} must be called when the screens are gone.
- */
 public final class OrePreviews implements AutoCloseable {
     private static final String EMISSIVE_SUFFIX = "_e";
 
-    /** One drawable layer of a face: an atlas sprite, or a standalone texture region. */
     public record Layer(@Nullable TextureAtlasSprite sprite, @Nullable Identifier texture,
                         int regionWidth, int regionHeight, int textureWidth, int textureHeight, boolean emissive) {
         static Layer of(TextureAtlasSprite sprite, boolean emissive) {
@@ -42,7 +35,6 @@ public final class OrePreviews implements AutoCloseable {
         }
     }
 
-    /** Visible faces of a block seen from above, south-east. */
     public record Cube(List<Layer> top, List<Layer> south, List<Layer> east, boolean approximate) { }
 
     public record Icon(Identifier texture, int width, int height) { }
@@ -56,7 +48,6 @@ public final class OrePreviews implements AutoCloseable {
     private final Map<String, Optional<Icon>> icons = new HashMap<>();
     private final List<Identifier> uploaded = new ArrayList<>();
 
-    /** The block as it looks in game with these settings. */
     public Cube cube(OreType ore, OreSettings settings, boolean masterEnabled) {
         if (!masterEnabled || !settings.enabled() || !settings.apply().blocks()) return vanilla(ore);
         var variant = TextureVariant.of(settings);
@@ -68,7 +59,6 @@ public final class OrePreviews implements AutoCloseable {
         return cubes.computeIfAbsent(new Key(ore, null, ""), key -> fromModel(ore, null));
     }
 
-    /** The block with the given custom resource pack. */
     public Cube pack(OreType ore, String pack) {
         if (pack.isEmpty()) return vanilla(ore);
         if (pack.equals(OreSpriteSource.loadedPack(ore)) && PackModelPlan.of(ore) != null) {
@@ -77,7 +67,6 @@ public final class OrePreviews implements AutoCloseable {
         return cubes.computeIfAbsent(new Key(ore, null, pack), key -> fromPackFiles(ore, pack));
     }
 
-    /** Whether the pack has a blockstate or a texture for this ore. */
     public boolean changes(OreType ore, String pack) {
         if (pack.isEmpty()) return false;
         return packChanges.computeIfAbsent(ore.key() + "|" + pack, key -> {

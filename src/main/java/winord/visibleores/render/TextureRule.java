@@ -16,7 +16,6 @@ public final class TextureRule {
         return resolve(ore, pos.getY());
     }
 
-    /** Texture set of a placed block of this entry at height y in the current dimension, or null for vanilla. */
     @Nullable
     public static TextureVariant resolve(OreType ore, int y) {
         var snapshot = VisibleOresConfig.get();

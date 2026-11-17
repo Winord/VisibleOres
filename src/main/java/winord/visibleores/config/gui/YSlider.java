@@ -9,7 +9,6 @@ import winord.visibleores.config.OreSettings;
 
 import java.util.function.IntConsumer;
 
-/** Slider over the world height range; arrow keys move it by exactly one block. */
 final class YSlider extends AbstractSliderButton {
     private static final int RANGE = OreSettings.MAX_Y - OreSettings.MIN_Y;
 
@@ -29,7 +28,6 @@ final class YSlider extends AbstractSliderButton {
         return level;
     }
 
-    /** Moves the slider without notifying the listener; used to keep the other bound in order. */
     void setLevel(int level) {
         this.level = Mth.clamp(level, OreSettings.MIN_Y, OreSettings.MAX_Y);
         this.value = toValue(this.level);

@@ -24,7 +24,6 @@ public record OreSpriteSource() implements SpriteSource {
 
     private static volatile Map<OreType, String> loadedPacks = Map.of();
 
-    /** Custom pack whose textures for this ore are currently in the block atlas, or an empty string. */
     public static String loadedPack(OreType ore) {
         return loadedPacks.getOrDefault(ore, "");
     }

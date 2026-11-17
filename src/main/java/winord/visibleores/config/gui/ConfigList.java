@@ -11,7 +11,6 @@ import net.minecraft.network.chat.Component;
 
 import java.util.List;
 
-/** Scrollable list of rows shared by all Visible Ores config screens. */
 final class ConfigList extends ContainerObjectSelectionList<ConfigList.Row> {
     static final int ROW_HEIGHT = 24;
     static final int HEADER_HEIGHT = 20;
@@ -47,7 +46,6 @@ final class ConfigList extends ContainerObjectSelectionList<ConfigList.Row> {
         }
     }
 
-    /** Centered section title. */
     static final class Header extends Row {
         private final Component text;
 
@@ -83,7 +81,6 @@ final class ConfigList extends ContainerObjectSelectionList<ConfigList.Row> {
         }
     }
 
-    /** One to three widgets sharing the row width equally. */
     static final class Widgets extends Row {
         private final List<AbstractWidget> widgets;
 

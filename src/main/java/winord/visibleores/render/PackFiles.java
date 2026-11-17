@@ -10,7 +10,6 @@ import winord.visibleores.config.CustomPacks;
 
 import java.io.IOException;
 
-/** Reads single files straight from a resource pack, without enabling it or reloading resources. */
 final class PackFiles {
     private PackFiles() { }
 

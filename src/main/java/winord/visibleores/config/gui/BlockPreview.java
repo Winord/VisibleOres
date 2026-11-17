@@ -7,7 +7,6 @@ import winord.visibleores.render.OrePreviews;
 
 import java.util.List;
 
-/** Draws an ore block as a small isometric cube from its real face textures (animated sprites keep animating). */
 final class BlockPreview {
     private static final float COS_30 = 0.8660254F;
     private static final int TOP_SHADE = 0xFFFFFFFF;
@@ -16,12 +15,10 @@ final class BlockPreview {
 
     private BlockPreview() { }
 
-    /** Width of a cube drawn with the given height. */
     static int width(int height) {
         return Math.round(height * COS_30);
     }
 
-    /** Draws the cube with its bounding box starting at (x, y); the cube is {@code height} pixels tall. */
     static void draw(GuiGraphicsExtractor graphics, OrePreviews.Cube cube, float x, float y, int height) {
         var edge = height / 2F;
         var dx = edge * COS_30;
@@ -33,7 +30,6 @@ final class BlockPreview {
         face(graphics, cube.east(), centerX, y + edge, dx, -dy, 0, edge, EAST_SHADE);
     }
 
-    /** Maps a 16x16 square onto the parallelogram origin + s*u + t*v. */
     private static void face(GuiGraphicsExtractor graphics, List<OrePreviews.Layer> layers,
                              float originX, float originY, float ux, float uy, float vx, float vy, int shade) {
         var pose = graphics.pose();

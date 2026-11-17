@@ -26,7 +26,6 @@ import winord.visibleores.util.Lang;
 import java.util.List;
 import java.util.function.UnaryOperator;
 
-/** Settings of a single entry, with a live preview of the block and the item as they will look in game. */
 final class OreSettingsScreen extends Screen {
     private static final int ROW_WIDTH = 310;
 
@@ -174,7 +173,6 @@ final class OreSettingsScreen extends Screen {
         draft.setOre(ore, change.apply(draft.ore(ore)));
     }
 
-    /** Vanilla block, then the block and the item with the current settings. */
     private final class PreviewRow extends ConfigList.Row {
         private static final int CUBE = 44;
         private static final int SPACING = 96;
@@ -207,7 +205,6 @@ final class OreSettingsScreen extends Screen {
             }
         }
 
-        /** The item through the real item renderer, using the unsaved settings. */
         private void drawItem(GuiGraphicsExtractor graphics, int centerX, int centerY) {
             var scale = 2.5F;
             var pose = graphics.pose();

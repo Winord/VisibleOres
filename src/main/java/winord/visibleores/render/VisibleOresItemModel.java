@@ -17,10 +17,6 @@ import winord.visibleores.config.OreType;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * Item model of a covered block item. When Item mode is on it renders the bundled item model of the selected
- * texture set (assets/visibleores/items/{variant}/{item}.json) instead of the vanilla one.
- */
 public final class VisibleOresItemModel implements ItemModel {
     private static final Map<Identifier, Boolean> BUNDLED = new ConcurrentHashMap<>();
 

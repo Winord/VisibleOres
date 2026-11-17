@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-/** Lists the resource packs of the resourcepacks folder with their icon and a preview of this ore. */
 final class PackPickerScreen extends Screen {
     private static final int ROW_WIDTH = 310;
     private static final int ROW_HEIGHT = 40;

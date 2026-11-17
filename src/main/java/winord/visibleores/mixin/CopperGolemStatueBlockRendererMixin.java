@@ -19,7 +19,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import winord.visibleores.render.WaxedEntityTextures;
 import winord.visibleores.render.WaxedRenderState;
 
-/** Waxed copper golem statues use the waxed golem textures when Waxed Copper is applied to blocks. */
 @Mixin(CopperGolemStatueBlockRenderer.class)
 public abstract class CopperGolemStatueBlockRendererMixin {
     @Inject(method = "extractRenderState(Lnet/minecraft/world/level/block/entity/CopperGolemStatueBlockEntity;Lnet/minecraft/client/renderer/blockentity/state/CopperGolemStatueRenderState;FLnet/minecraft/world/phys/Vec3;Lnet/minecraft/client/renderer/feature/ModelFeatureRenderer$CrumblingOverlay;)V",
